@@ -1270,7 +1270,7 @@ with tab3:
             marker_line_width=1,
         ))
         fig_soc.add_vline(x=80, line_dash="dot", line_color="#ef4444",
-                          annotation_text="Target 80%", annotation_font_size=10, annotation_font_color="#475569", annotation_font_color="#475569")
+                          annotation_text="Target 80%", annotation_font_size=10, annotation_font_color="#475569")
         fig_soc.update_layout(
             title="SoC Distribution: Arrival vs. Departure",
             barmode="overlay",
