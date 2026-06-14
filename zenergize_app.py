@@ -42,204 +42,198 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+/* ENTIRE APP BACKGROUND */
+.stApp {
+    background:
+        radial-gradient(circle at top left,
+        rgba(34,211,238,0.08),
+        transparent 30%),
 
-:root {
-    --bg: #0b1020;
-    --panel: #121a2b;
-    --panel-2: #182235;
-    --border: rgba(255,255,255,0.06);
+        radial-gradient(circle at bottom right,
+        rgba(52,211,153,0.05),
+        transparent 30%),
 
-    --text: #f3f4f6;
-    --muted: #94a3b8;
+        #0b1020;
 
-    --cyan: #22d3ee;
-    --green: #34d399;
-    --amber: #fbbf24;
-    --red: #f87171;
-
-    --glow: 0 0 24px rgba(34,211,238,0.08);
+    color: #f3f4f6;
 }
 
-
-
-/* MAIN CONTAINER */
-.block-container {
+/* MAIN CONTENT AREA */
+.main .block-container {
     padding-top: 2rem;
     max-width: 1350px;
 }
 
-/* HEADER */
-.app-header {
-    padding-bottom: 1rem;
-    margin-bottom: 2rem;
-    border-bottom: 1px solid var(--border);
+/* REMOVE STREAMLIT DEFAULT WHITE */
+[data-testid="stAppViewContainer"] {
+    background: transparent;
 }
 
-.app-title {
-    font-size: 2rem;
-    font-weight: 800;
-    letter-spacing: -0.04em;
+/* SIDEBAR */
+[data-testid="stSidebar"] {
+    background: #111827;
+}
+
+/* ALL TEXT */
+html, body, p, div, span, label {
+    color: #f3f4f6;
+    font-family: Inter, sans-serif;
+}
+
+/* HEADERS */
+h1, h2, h3 {
     color: white;
-}
-
-.app-subtitle {
-    font-size: 0.95rem;
-    color: var(--muted);
-    margin-top: 0.4rem;
 }
 
 /* METRIC CARDS */
 .metric-card {
-    background: linear-gradient(
-        145deg,
-        rgba(24,34,53,0.95),
-        rgba(17,24,39,0.95)
-    );
+    background: rgba(17,24,39,0.88);
 
-    border: 1px solid var(--border);
+    border: 1px solid rgba(255,255,255,0.06);
 
-    border-radius: 18px;
+    border-radius: 20px;
 
     padding: 1.3rem;
 
     backdrop-filter: blur(12px);
 
     box-shadow:
-        0 4px 24px rgba(0,0,0,0.25),
-        var(--glow);
+        0 4px 24px rgba(0,0,0,0.35);
 
-    transition: all 0.25s ease;
+    transition: 0.25s ease;
 }
 
 .metric-card:hover {
-    transform: translateY(-3px);
-    border-color: rgba(34,211,238,0.3);
+    transform: translateY(-4px);
+    border-color: rgba(34,211,238,0.25);
 }
 
-/* LABELS */
+/* METRIC LABEL */
 .metric-label {
-    color: var(--muted);
-    font-size: 0.75rem;
+    color: #94a3b8;
+    font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    font-weight: 600;
+    font-weight: 700;
 }
 
-/* VALUES */
+/* METRIC VALUE */
 .metric-value {
+    color: white;
     font-size: 2rem;
     font-weight: 800;
     margin-top: 0.4rem;
     letter-spacing: -0.04em;
-    color: white;
 }
 
-/* SUBTEXT */
+/* METRIC SUBTEXT */
 .metric-sub {
-    color: var(--muted);
-    font-size: 0.78rem;
+    color: #94a3b8;
+    font-size: 0.8rem;
     margin-top: 0.4rem;
 }
 
-/* SECTION LABELS */
+/* SECTION TITLES */
 .section-label {
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--cyan);
+    color: #22d3ee;
 
+    font-size: 0.82rem;
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+
+    margin-top: 1.8rem;
     margin-bottom: 1rem;
-    margin-top: 1.5rem;
 }
 
 /* ALERTS */
 .alert-row {
     background: rgba(251,191,36,0.08);
-    border: 1px solid rgba(251,191,36,0.18);
-    border-left: 4px solid var(--amber);
 
-    border-radius: 14px;
+    border: 1px solid rgba(251,191,36,0.18);
+
+    border-left: 4px solid #fbbf24;
+
+    border-radius: 16px;
 
     padding: 1rem;
+
     margin-bottom: 0.8rem;
 }
 
 .alert-row-red {
     background: rgba(248,113,113,0.08);
-    border: 1px solid rgba(248,113,113,0.18);
-    border-left: 4px solid var(--red);
 
-    border-radius: 14px;
+    border: 1px solid rgba(248,113,113,0.18);
+
+    border-left: 4px solid #f87171;
+
+    border-radius: 16px;
 
     padding: 1rem;
+
     margin-bottom: 0.8rem;
-}
-
-/* TEXT */
-.alert-text {
-    color: white;
-    font-size: 0.9rem;
-}
-
-.alert-time {
-    color: var(--muted);
-    font-size: 0.75rem;
 }
 
 /* BUTTONS */
 .stButton button {
     background: linear-gradient(
         135deg,
-        #0f172a,
-        #182235
-    );
+        #182235,
+        #0f172a
+    ) !important;
 
-    color: white;
+    color: white !important;
 
-    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px !important;
 
-    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.08) !important;
 
-    padding: 0.7rem 1rem;
+    padding: 0.7rem 1rem !important;
 
-    font-weight: 600;
+    font-weight: 700 !important;
 
-    transition: all 0.2s ease;
+    transition: 0.2s ease;
 }
 
 .stButton button:hover {
-    border-color: var(--cyan);
+    border-color: #22d3ee !important;
+
     transform: translateY(-2px);
 }
 
 /* TABS */
 .stTabs [data-baseweb="tab"] {
-    color: var(--muted);
-    font-weight: 700;
-    letter-spacing: 0.04em;
+    color: #94a3b8 !important;
+    font-weight: 700 !important;
 }
 
 .stTabs [aria-selected="true"] {
     color: white !important;
 }
 
-/* INPUTS */
-.stSelectbox div,
-.stNumberInput div,
-.stSlider div {
+/* INPUT BOXES */
+.stSelectbox > div > div,
+.stNumberInput > div > div,
+.stSlider {
+    background: #111827 !important;
     border-radius: 12px !important;
 }
 
-/* REMOVE STREAMLIT MENU */
+/* HORIZONTAL LINE */
+hr {
+    border-color: rgba(255,255,255,0.08);
+}
+
+/* HIDE STREAMLIT BRANDING */
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
+header {visibility: hidden;}
 
 </style>
 """, unsafe_allow_html=True)
-
-
 # ─────────────────────────────────────────────────────────────
 #  HEADER
 # ─────────────────────────────────────────────────────────────
