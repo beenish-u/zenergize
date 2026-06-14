@@ -38,136 +38,211 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
+
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --bg: #0b1020;
+    --panel: #121a2b;
+    --panel-2: #182235;
+    --border: rgba(255,255,255,0.06);
+
+    --text: #f3f4f6;
+    --muted: #94a3b8;
+
+    --cyan: #22d3ee;
+    --green: #34d399;
+    --amber: #fbbf24;
+    --red: #f87171;
+
+    --glow: 0 0 24px rgba(34,211,238,0.08);
+}
 
 html, body, [class*="css"] {
+    background: var(--bg);
+    color: var(--text);
     font-family: 'Inter', sans-serif;
 }
 
-/* Remove default Streamlit top padding */
+/* MAIN CONTAINER */
 .block-container {
-    padding-top: 1.5rem;
-    padding-bottom: 2rem;
-    max-width: 1200px;
+    padding-top: 2rem;
+    max-width: 1350px;
 }
 
-/* Header strip */
+/* HEADER */
 .app-header {
-    border-bottom: 2px solid #1a1a2e;
-    padding-bottom: 0.75rem;
-    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
 }
+
 .app-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #1a1a2e;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: white;
 }
+
 .app-subtitle {
-    font-size: 0.75rem;
-    color: #6b7280;
-    letter-spacing: 0.04em;
-    margin-top: 0.1rem;
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-top: 0.4rem;
 }
 
-/* Metric cards */
+/* METRIC CARDS */
 .metric-card {
-    background: #f8f9fb;
-    border: 1px solid #e5e7eb;
-    border-radius: 4px;
-    padding: 1rem 1.2rem;
+    background: linear-gradient(
+        145deg,
+        rgba(24,34,53,0.95),
+        rgba(17,24,39,0.95)
+    );
+
+    border: 1px solid var(--border);
+
+    border-radius: 18px;
+
+    padding: 1.3rem;
+
+    backdrop-filter: blur(12px);
+
+    box-shadow:
+        0 4px 24px rgba(0,0,0,0.25),
+        var(--glow);
+
+    transition: all 0.25s ease;
 }
+
+.metric-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(34,211,238,0.3);
+}
+
+/* LABELS */
 .metric-label {
-    font-size: 0.7rem;
+    color: var(--muted);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
     font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: #6b7280;
-    margin-bottom: 0.3rem;
 }
+
+/* VALUES */
 .metric-value {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #1a1a2e;
-    font-family: 'IBM Plex Mono', monospace;
-    line-height: 1;
+    font-size: 2rem;
+    font-weight: 800;
+    margin-top: 0.4rem;
+    letter-spacing: -0.04em;
+    color: white;
 }
+
+/* SUBTEXT */
 .metric-sub {
-    font-size: 0.72rem;
-    color: #9ca3af;
-    margin-top: 0.25rem;
+    color: var(--muted);
+    font-size: 0.78rem;
+    margin-top: 0.4rem;
 }
 
-/* Status badges */
-.badge-green  { display:inline-block; background:#d1fae5; color:#065f46; font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:2px; letter-spacing:0.05em; }
-.badge-amber  { display:inline-block; background:#fef3c7; color:#92400e; font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:2px; letter-spacing:0.05em; }
-.badge-red    { display:inline-block; background:#fee2e2; color:#991b1b; font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:2px; letter-spacing:0.05em; }
-
-/* Section headers */
+/* SECTION LABELS */
 .section-label {
-    font-size: 0.68rem;
+    font-size: 0.8rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #9ca3af;
-    margin-bottom: 0.75rem;
-    padding-bottom: 0.4rem;
-    border-bottom: 1px solid #f3f4f6;
+    letter-spacing: 0.12em;
+    color: var(--cyan);
+
+    margin-bottom: 1rem;
+    margin-top: 1.5rem;
 }
 
-/* Alert rows */
+/* ALERTS */
 .alert-row {
-    background: #fffbeb;
-    border-left: 3px solid #f59e0b;
-    padding: 0.6rem 0.8rem;
-    margin-bottom: 0.4rem;
-    border-radius: 0 2px 2px 0;
+    background: rgba(251,191,36,0.08);
+    border: 1px solid rgba(251,191,36,0.18);
+    border-left: 4px solid var(--amber);
+
+    border-radius: 14px;
+
+    padding: 1rem;
+    margin-bottom: 0.8rem;
 }
+
 .alert-row-red {
-    background: #fef2f2;
-    border-left: 3px solid #ef4444;
-    padding: 0.6rem 0.8rem;
-    margin-bottom: 0.4rem;
-    border-radius: 0 2px 2px 0;
-}
-.alert-text { font-size: 0.8rem; color: #374151; }
-.alert-time { font-size: 0.68rem; color: #9ca3af; font-family: 'IBM Plex Mono', monospace; }
+    background: rgba(248,113,113,0.08);
+    border: 1px solid rgba(248,113,113,0.18);
+    border-left: 4px solid var(--red);
 
-/* Data note */
-.data-note {
-    font-size: 0.68rem;
-    color: #9ca3af;
-    font-style: italic;
-    margin-top: 0.5rem;
+    border-radius: 14px;
+
+    padding: 1rem;
+    margin-bottom: 0.8rem;
 }
 
-/* Tab styling */
-div[data-testid="stTabs"] button {
-    font-size: 0.78rem !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.05em !important;
-    text-transform: uppercase !important;
+/* TEXT */
+.alert-text {
+    color: white;
+    font-size: 0.9rem;
 }
 
-/* Horizontal rule */
-hr { border: none; border-top: 1px solid #e5e7eb; margin: 1.5rem 0; }
-
-/* Input labels */
-.stSelectbox label, .stNumberInput label, .stSlider label {
-    font-size: 0.75rem !important;
-    font-weight: 600 !important;
-    color: #374151 !important;
-    letter-spacing: 0.03em !important;
+.alert-time {
+    color: var(--muted);
+    font-size: 0.75rem;
 }
 
-/* Remove red/green delta arrows default styling */
-.stMetric { display: none; }
+/* BUTTONS */
+.stButton button {
+    background: linear-gradient(
+        135deg,
+        #0f172a,
+        #182235
+    );
+
+    color: white;
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    border-radius: 12px;
+
+    padding: 0.7rem 1rem;
+
+    font-weight: 600;
+
+    transition: all 0.2s ease;
+}
+
+.stButton button:hover {
+    border-color: var(--cyan);
+    transform: translateY(-2px);
+}
+
+/* TABS */
+.stTabs [data-baseweb="tab"] {
+    color: var(--muted);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.stTabs [aria-selected="true"] {
+    color: white !important;
+}
+
+/* INPUTS */
+.stSelectbox div,
+.stNumberInput div,
+.stSlider div {
+    border-radius: 12px !important;
+}
+
+/* REMOVE STREAMLIT MENU */
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
 
 </style>
 """, unsafe_allow_html=True)
+
 
 # ─────────────────────────────────────────────────────────────
 #  HEADER
