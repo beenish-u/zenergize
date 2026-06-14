@@ -38,210 +38,149 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
-
 st.markdown("""
 <style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
 
-/* ENTIRE APP BACKGROUND */
-.stApp {
-    background:
-        radial-gradient(circle at top left,
-        rgba(34,211,238,0.08),
-        transparent 30%),
-
-        radial-gradient(circle at bottom right,
-        rgba(52,211,153,0.05),
-        transparent 30%),
-
-        #0b1020;
-
-    color: #f3f4f6;
+html, body, [class*="css"] {
+    font-family: 'DM Sans', sans-serif;
+    background-color: #f7f6f3;
+    color: #2d2d2d;
 }
 
-/* MAIN CONTENT AREA */
-.main .block-container {
+.block-container {
     padding-top: 2rem;
-    max-width: 1350px;
+    padding-bottom: 2.5rem;
+    max-width: 1180px;
+    background-color: #f7f6f3;
 }
 
-/* REMOVE STREAMLIT DEFAULT WHITE */
-[data-testid="stAppViewContainer"] {
-    background: transparent;
+/* Header */
+.app-header {
+    margin-bottom: 2rem;
 }
-
-/* SIDEBAR */
-[data-testid="stSidebar"] {
-    background: #111827;
+.app-title {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #1e293b;
+    letter-spacing: -0.01em;
 }
-
-/* ALL TEXT */
-html, body, p, div, span, label {
-    color: #f3f4f6;
-    font-family: Inter, sans-serif;
-}
-
-/* HEADERS */
-h1, h2, h3 {
-    color: white;
-}
-
-/* METRIC CARDS */
-.metric-card {
-    background: rgba(17,24,39,0.88);
-
-    border: 1px solid rgba(255,255,255,0.06);
-
-    border-radius: 20px;
-
-    padding: 1.3rem;
-
-    backdrop-filter: blur(12px);
-
-    box-shadow:
-        0 4px 24px rgba(0,0,0,0.35);
-
-    transition: 0.25s ease;
-}
-
-.metric-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(34,211,238,0.25);
-}
-
-/* METRIC LABEL */
-.metric-label {
-    color: #94a3b8;
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-weight: 700;
-}
-
-/* METRIC VALUE */
-.metric-value {
-    color: white;
-    font-size: 2rem;
-    font-weight: 800;
-    margin-top: 0.4rem;
-    letter-spacing: -0.04em;
-}
-
-/* METRIC SUBTEXT */
-.metric-sub {
-    color: #94a3b8;
-    font-size: 0.8rem;
-    margin-top: 0.4rem;
-}
-
-/* SECTION TITLES */
-.section-label {
-    color: #22d3ee;
-
+.app-subtitle {
     font-size: 0.82rem;
-    font-weight: 800;
+    color: #64748b;
+    margin-top: 0.2rem;
+}
 
-    letter-spacing: 0.12em;
-
+/* Metric cards */
+.metric-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 1.1rem 1.3rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.metric-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-
-    margin-top: 1.8rem;
-    margin-bottom: 1rem;
+    color: #94a3b8;
+    margin-bottom: 0.4rem;
+}
+.metric-value {
+    font-size: 1.65rem;
+    font-weight: 600;
+    color: #1e293b;
+    font-family: 'DM Mono', monospace;
+    line-height: 1.1;
+}
+.metric-sub {
+    font-size: 0.73rem;
+    color: #94a3b8;
+    margin-top: 0.3rem;
 }
 
-/* ALERTS */
+/* Status badges */
+.badge-green  { display:inline-block; background:#dcfce7; color:#166534; font-size:0.68rem; font-weight:600; padding:2px 9px; border-radius:20px; letter-spacing:0.04em; }
+.badge-amber  { display:inline-block; background:#fef9c3; color:#854d0e; font-size:0.68rem; font-weight:600; padding:2px 9px; border-radius:20px; letter-spacing:0.04em; }
+.badge-red    { display:inline-block; background:#fee2e2; color:#991b1b; font-size:0.68rem; font-weight:600; padding:2px 9px; border-radius:20px; letter-spacing:0.04em; }
+
+/* Section headers */
+.section-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #94a3b8;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* Alert rows */
 .alert-row {
-    background: rgba(251,191,36,0.08);
-
-    border: 1px solid rgba(251,191,36,0.18);
-
-    border-left: 4px solid #fbbf24;
-
-    border-radius: 16px;
-
-    padding: 1rem;
-
-    margin-bottom: 0.8rem;
+    background: #fffbeb;
+    border-left: 3px solid #f59e0b;
+    padding: 0.65rem 0.9rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0 6px 6px 0;
 }
-
 .alert-row-red {
-    background: rgba(248,113,113,0.08);
+    background: #fff1f2;
+    border-left: 3px solid #f43f5e;
+    padding: 0.65rem 0.9rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0 6px 6px 0;
+}
+.alert-text { font-size: 0.82rem; color: #334155; }
+.alert-time { font-size: 0.7rem; color: #94a3b8; font-family: 'DM Mono', monospace; }
 
-    border: 1px solid rgba(248,113,113,0.18);
-
-    border-left: 4px solid #f87171;
-
-    border-radius: 16px;
-
-    padding: 1rem;
-
-    margin-bottom: 0.8rem;
+/* Data note */
+.data-note {
+    font-size: 0.7rem;
+    color: #94a3b8;
+    font-style: italic;
+    margin-top: 0.6rem;
 }
 
-/* BUTTONS */
-.stButton button {
-    background: linear-gradient(
-        135deg,
-        #182235,
-        #0f172a
-    ) !important;
-
-    color: white !important;
-
-    border-radius: 14px !important;
-
-    border: 1px solid rgba(255,255,255,0.08) !important;
-
-    padding: 0.7rem 1rem !important;
-
-    font-weight: 700 !important;
-
-    transition: 0.2s ease;
+/* Tab styling */
+div[data-testid="stTabs"] button {
+    font-size: 0.82rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.01em !important;
 }
 
-.stButton button:hover {
-    border-color: #22d3ee !important;
+/* Horizontal rule */
+hr { border: none; border-top: 1px solid #e2e8f0; margin: 1.5rem 0; }
 
-    transform: translateY(-2px);
+/* Input labels */
+.stSelectbox label, .stNumberInput label, .stSlider label {
+    font-size: 0.77rem !important;
+    font-weight: 500 !important;
+    color: #475569 !important;
 }
 
-/* TABS */
-.stTabs [data-baseweb="tab"] {
-    color: #94a3b8 !important;
-    font-weight: 700 !important;
-}
+/* Remove default st.metric */
+.stMetric { display: none; }
 
-.stTabs [aria-selected="true"] {
-    color: white !important;
+/* Streamlit button */
+.stButton > button {
+    border-radius: 8px !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-weight: 500 !important;
 }
-
-/* INPUT BOXES */
-.stSelectbox > div > div,
-.stNumberInput > div > div,
-.stSlider {
-    background: #111827 !important;
-    border-radius: 12px !important;
-}
-
-/* HORIZONTAL LINE */
-hr {
-    border-color: rgba(255,255,255,0.08);
-}
-
-/* HIDE STREAMLIT BRANDING */
-#MainMenu {visibility: hidden;}
-footer {visibility: hidden;}
-header {visibility: hidden;}
 
 </style>
 """, unsafe_allow_html=True)
+
 # ─────────────────────────────────────────────────────────────
 #  HEADER
 # ─────────────────────────────────────────────────────────────
 
 st.markdown("""
 <div class="app-header">
-  <div class="app-title">Zenergize Operations Intelligence</div>
-  <div class="app-subtitle">Charger Health · Inverter TCO · Fleet Optimiser</div>
+  <div class="app-title">Zenergize — Operations Intelligence</div>
+  <div class="app-subtitle">Solar Inverter TCO &nbsp;·&nbsp; Charger Health &nbsp;·&nbsp; Fleet Optimiser</div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -251,8 +190,8 @@ st.markdown("""
 # ─────────────────────────────────────────────────────────────
 
 tab1, tab2, tab3 = st.tabs([
-    "Charger Health Monitor",
     "Solar Inverter TCO",
+    "Charger Health Monitor",
     "Fleet Charging Optimiser",
 ])
 
@@ -269,6 +208,340 @@ tab1, tab2, tab3 = st.tabs([
 # ═══════════════════════════════════════════════════════════════
 
 with tab1:
+
+    # City irradiance database (GHI kWh/m²/year, from PVGIS data)
+    CITY_DATA = {
+        "Jaipur":      {"ghi": 1950, "lat": 26.91, "lon": 75.78, "state": "Rajasthan"},
+        "Jodhpur":     {"ghi": 2050, "lat": 26.29, "lon": 73.02, "state": "Rajasthan"},
+        "Delhi":       {"ghi": 1750, "lat": 28.61, "lon": 77.21, "state": "Delhi"},
+        "Pune":        {"ghi": 1850, "lat": 18.52, "lon": 73.86, "state": "Maharashtra"},
+        "Ahmedabad":   {"ghi": 2000, "lat": 23.02, "lon": 72.57, "state": "Gujarat"},
+        "Hyderabad":   {"ghi": 1900, "lat": 17.38, "lon": 78.47, "state": "Telangana"},
+        "Chennai":     {"ghi": 1800, "lat": 13.08, "lon": 80.27, "state": "Tamil Nadu"},
+        "Bengaluru":   {"ghi": 1780, "lat": 12.97, "lon": 77.59, "state": "Karnataka"},
+        "Lucknow":     {"ghi": 1680, "lat": 26.85, "lon": 80.95, "state": "Uttar Pradesh"},
+        "Bhopal":      {"ghi": 1820, "lat": 23.25, "lon": 77.41, "state": "Madhya Pradesh"},
+        "Nagpur":      {"ghi": 1870, "lat": 21.14, "lon": 79.08, "state": "Maharashtra"},
+        "Kolkata":     {"ghi": 1580, "lat": 22.57, "lon": 88.36, "state": "West Bengal"},
+        "Indore":      {"ghi": 1890, "lat": 22.72, "lon": 75.86, "state": "Madhya Pradesh"},
+        "Surat":       {"ghi": 1950, "lat": 21.17, "lon": 72.83, "state": "Gujarat"},
+        "Bikaner":     {"ghi": 2100, "lat": 28.01, "lon": 73.31, "state": "Rajasthan"},
+    }
+
+    def tco_model(
+        city, system_kwp, tariff, tariff_escalation,
+        comp_eff, zen_eff,
+        comp_price_per_kw, zen_price_per_kw,
+        comp_service_cost, zen_service_cost,
+        comp_service_events, zen_service_events,
+        discount_rate, years=25
+    ):
+        """
+        25-year TCO and NPV model.
+
+        Returns dict of annual arrays and summary figures.
+        """
+        ghi = CITY_DATA[city]["ghi"]
+
+        # System PR (excluding inverter efficiency)
+        pr_system = 0.84  # cable losses, soiling, mismatch, shading
+
+        # Annual generation (kWh/year)
+        # Gen = System_kWp × GHI × PR_system × η_inverter
+        gen_zen  = system_kwp * ghi * pr_system * (zen_eff / 100)
+        gen_comp = system_kwp * ghi * pr_system * (comp_eff / 100)
+        gen_gap  = gen_zen - gen_comp  # annual kWh advantage of Zenergize
+
+        # 25-year arrays
+        yrs = np.arange(1, years + 1)
+
+        # Tariff escalation
+        tariff_each_year = tariff * (1 + tariff_escalation / 100) ** (yrs - 1)
+
+        # Annual revenue from generation gap
+        revenue_gap_annual = gen_gap * tariff_each_year
+
+        # Cumulative revenue gap (undiscounted)
+        cum_revenue_gap = np.cumsum(revenue_gap_annual)
+
+        # NPV of revenue gap
+        npv_factors = 1 / (1 + discount_rate / 100) ** yrs
+        npv_revenue_gap = np.sum(revenue_gap_annual * npv_factors)
+
+        # Service cost differential (annual events × cost/event)
+        service_gap_annual = (
+            comp_service_events * comp_service_cost
+            - zen_service_events * zen_service_cost
+        )  # positive means Zenergize saves money each year
+
+        npv_service_gap = service_gap_annual * np.sum(npv_factors)
+
+        # Upfront cost premium for Zenergize
+        price_premium = (zen_price_per_kw - comp_price_per_kw) * system_kwp
+
+        # Total 25-year NPV advantage of Zenergize
+        total_npv_advantage = npv_revenue_gap + npv_service_gap - price_premium
+
+        # Breakeven year (undiscounted, conservative)
+        cumulative_savings = np.cumsum(
+            revenue_gap_annual + service_gap_annual
+        )
+        breakeven_mask = cumulative_savings >= price_premium
+        if breakeven_mask.any():
+            breakeven_year = yrs[breakeven_mask][0]
+        else:
+            breakeven_year = None
+
+        return {
+            "years": yrs,
+            "gen_zen": gen_zen,
+            "gen_comp": gen_comp,
+            "gen_gap_annual": gen_gap,
+            "gen_gap_25yr": gen_gap * years,
+            "tariff_each_year": tariff_each_year,
+            "revenue_gap_annual": revenue_gap_annual,
+            "cum_revenue_gap": cum_revenue_gap,
+            "npv_revenue_gap": npv_revenue_gap,
+            "npv_service_gap": npv_service_gap,
+            "price_premium": price_premium,
+            "total_npv_advantage": total_npv_advantage,
+            "breakeven_year": breakeven_year,
+            "service_gap_annual": service_gap_annual,
+        }
+
+    # ── Inputs ─────────────────────────────────────────────────
+
+    st.markdown('<div class="section-label">System Parameters</div>', unsafe_allow_html=True)
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        city = st.selectbox("Installation City", sorted(CITY_DATA.keys()), index=0)
+        system_kwp = st.number_input("System Size (kWp)", min_value=1.0, max_value=500.0, value=5.0, step=0.5)
+        tariff = st.number_input("Current Electricity Tariff (₹/kWh)", min_value=3.0, max_value=12.0, value=7.0, step=0.25)
+        tariff_escalation = st.slider("Annual Tariff Escalation (%)", 0.0, 10.0, 5.0, 0.5)
+
+    with col2:
+        st.markdown("**Competitor Inverter**")
+        comp_eff = st.number_input("Competitor Efficiency (%)", min_value=90.0, max_value=99.9, value=96.5, step=0.1)
+        comp_price = st.number_input("Competitor Price (₹/kW)", min_value=3000, max_value=20000, value=8000, step=500)
+        comp_service = st.number_input("Competitor Service Cost / Event (₹)", min_value=500, max_value=50000, value=12000, step=500)
+        comp_events = st.number_input("Competitor Service Events / Year", min_value=0.0, max_value=5.0, value=0.5, step=0.1)
+
+    with col3:
+        st.markdown("**Zenergize Inverter**")
+        zen_eff = st.number_input("Zenergize Efficiency (%)", min_value=90.0, max_value=99.9, value=97.8, step=0.1)
+        zen_price = st.number_input("Zenergize Price (₹/kW)", min_value=3000, max_value=20000, value=11500, step=500)
+        zen_service = st.number_input("Zenergize Service Cost / Event (₹)", min_value=500, max_value=50000, value=2500, step=500)
+        zen_events = st.number_input("Zenergize Service Events / Year", min_value=0.0, max_value=5.0, value=0.3, step=0.1)
+
+    discount_rate = st.slider("Discount Rate (%)", 4.0, 15.0, 8.0, 0.5)
+
+    run_tco = st.button("Calculate 25-Year TCO", type="primary")
+
+    if run_tco or True:  # auto-calculate on first load too
+        result = tco_model(
+            city=city,
+            system_kwp=system_kwp,
+            tariff=tariff,
+            tariff_escalation=tariff_escalation,
+            comp_eff=comp_eff,
+            zen_eff=zen_eff,
+            comp_price_per_kw=comp_price,
+            zen_price_per_kw=zen_price,
+            comp_service_cost=comp_service,
+            zen_service_cost=zen_service,
+            comp_service_events=comp_events,
+            zen_service_events=zen_events,
+            discount_rate=discount_rate,
+        )
+
+        st.markdown("<hr>", unsafe_allow_html=True)
+        st.markdown('<div class="section-label">25-Year Analysis Results</div>', unsafe_allow_html=True)
+
+        # Summary cards
+        col_r1, col_r2, col_r3, col_r4 = st.columns(4)
+        adv = result["total_npv_advantage"]
+        adv_color = "#10b981" if adv >= 0 else "#ef4444"
+
+        with col_r1:
+            st.markdown(f"""
+            <div class="metric-card">
+              <div class="metric-label">25-Year NPV Advantage</div>
+              <div class="metric-value" style="color:{adv_color}">₹{abs(adv):,.0f}</div>
+              <div class="metric-sub">{"In favour of Zenergize" if adv >= 0 else "In favour of competitor"}</div>
+            </div>""", unsafe_allow_html=True)
+
+        with col_r2:
+            st.markdown(f"""
+            <div class="metric-card">
+              <div class="metric-label">Annual Generation Advantage</div>
+              <div class="metric-value">{result['gen_gap_annual']:,.0f}</div>
+              <div class="metric-sub">kWh/year more from Zenergize</div>
+            </div>""", unsafe_allow_html=True)
+
+        with col_r3:
+            be = result["breakeven_year"]
+            be_str = f"Year {be}" if be else ">25 yr"
+            st.markdown(f"""
+            <div class="metric-card">
+              <div class="metric-label">Breakeven Point</div>
+              <div class="metric-value">{be_str}</div>
+              <div class="metric-sub">Premium recovered vs. competitor</div>
+            </div>""", unsafe_allow_html=True)
+
+        with col_r4:
+            upfront = result["price_premium"]
+            st.markdown(f"""
+            <div class="metric-card">
+              <div class="metric-label">Upfront Premium</div>
+              <div class="metric-value">₹{upfront:,.0f}</div>
+              <div class="metric-sub">Additional cost for Zenergize</div>
+            </div>""", unsafe_allow_html=True)
+
+        st.markdown("<br>", unsafe_allow_html=True)
+
+        # Charts
+        col_ch1, col_ch2 = st.columns(2)
+
+        with col_ch1:
+            # Cumulative savings over 25 years
+            fig_cum = go.Figure()
+            fig_cum.add_trace(go.Scatter(
+                x=result["years"],
+                y=result["cum_revenue_gap"] + result["service_gap_annual"] * result["years"] - result["price_premium"],
+                mode="lines",
+                name="Cumulative net advantage",
+                line=dict(color="#334155", width=2),
+                fill="tozeroy",
+                fillcolor="rgba(16,185,129,0.1)",
+            ))
+            fig_cum.add_hline(y=0, line_dash="solid", line_color="#cbd5e1", line_width=1)
+            if result["breakeven_year"]:
+                fig_cum.add_vline(
+                    x=result["breakeven_year"],
+                    line_dash="dot", line_color="#f59e0b",
+                    annotation_text=f"Breakeven: Year {result['breakeven_year']}",
+                    annotation_font_size=10, annotation_font_color="#475569",
+                )
+            fig_cum.update_layout(
+                title="Cumulative Net Advantage of Zenergize (₹)",
+                height=300,
+                margin=dict(l=0, r=0, t=36, b=10),
+                font=dict(family="DM Sans", size=11, color="#334155"),
+                plot_bgcolor="rgba(0,0,0,0)",
+                paper_bgcolor="rgba(0,0,0,0)",
+                showlegend=False,
+                yaxis=dict(tickprefix="₹", tickformat=",.0f"),
+            )
+            st.plotly_chart(fig_cum, use_container_width=True, config={"displayModeBar": False})
+
+        with col_ch2:
+            # Sensitivity: tariff escalation impact on NPV
+            escalations = np.arange(0, 11, 1)
+            npv_at_esc = []
+            for esc in escalations:
+                r = tco_model(
+                    city=city, system_kwp=system_kwp, tariff=tariff,
+                    tariff_escalation=esc, comp_eff=comp_eff, zen_eff=zen_eff,
+                    comp_price_per_kw=comp_price, zen_price_per_kw=zen_price,
+                    comp_service_cost=comp_service, zen_service_cost=zen_service,
+                    comp_service_events=comp_events, zen_service_events=zen_events,
+                    discount_rate=discount_rate,
+                )
+                npv_at_esc.append(r["total_npv_advantage"])
+
+            fig_sens = go.Figure()
+            fig_sens.add_trace(go.Scatter(
+                x=escalations, y=npv_at_esc,
+                mode="lines+markers",
+                line=dict(color="#334155", width=2),
+                marker=dict(size=6),
+                name="NPV",
+            ))
+            fig_sens.add_hline(y=0, line_dash="dot", line_color="#ef4444", line_width=1)
+            fig_sens.update_layout(
+                title="Sensitivity: NPV vs Annual Tariff Escalation (%)",
+                height=300,
+                margin=dict(l=0, r=0, t=36, b=10),
+                font=dict(family="DM Sans", size=11, color="#334155"),
+                plot_bgcolor="rgba(0,0,0,0)",
+                paper_bgcolor="rgba(0,0,0,0)",
+                showlegend=False,
+                xaxis=dict(title="Annual Tariff Escalation (%)"),
+                yaxis=dict(tickprefix="₹", tickformat=",.0f"),
+            )
+            st.plotly_chart(fig_sens, use_container_width=True, config={"displayModeBar": False})
+
+        # Waterfall breakdown
+        st.markdown('<div class="section-label">Cost-Benefit Breakdown</div>', unsafe_allow_html=True)
+
+        wf_labels = ["Upfront Premium (cost)", "Energy Revenue Advantage (NPV)", "Service Saving (NPV)", "Net Advantage"]
+        wf_values = [
+            -result["price_premium"],
+            result["npv_revenue_gap"],
+            result["npv_service_gap"],
+            result["total_npv_advantage"],
+        ]
+        wf_measure = ["relative", "relative", "relative", "total"]
+        wf_colors = ["#ef4444", "#10b981", "#10b981", "#1a1a2e"]
+
+        fig_wf = go.Figure(go.Waterfall(
+            orientation="v",
+            measure=wf_measure,
+            x=wf_labels,
+            y=wf_values,
+            connector={"line": {"color": "#e5e7eb", "width": 1}},
+            decreasing={"marker": {"color": "#fee2e2", "line": {"color": "#ef4444", "width": 1}}},
+            increasing={"marker": {"color": "#d1fae5", "line": {"color": "#10b981", "width": 1}}},
+            totals={"marker": {"color": "#334155"}},
+            text=[f"₹{v:,.0f}" for v in wf_values],
+            textposition="outside",
+        ))
+        fig_wf.update_layout(
+            height=300,
+            margin=dict(l=0, r=0, t=10, b=10),
+            font=dict(family="DM Sans", size=11, color="#334155"),
+            plot_bgcolor="rgba(0,0,0,0)",
+            paper_bgcolor="rgba(0,0,0,0)",
+            showlegend=False,
+            yaxis=dict(tickprefix="₹", tickformat=",.0f"),
+        )
+        st.plotly_chart(fig_wf, use_container_width=True, config={"displayModeBar": False})
+
+        # Location context
+        city_info = CITY_DATA[city]
+        st.markdown(f"""
+        <p class="data-note">
+        Location: {city}, {city_info['state']} — Annual irradiance: {city_info['ghi']} kWh/m²/year (PVGIS reference data).
+        Efficiency advantage: {zen_eff - comp_eff:.1f}% → {result['gen_gap_annual']:,.0f} kWh/year on {system_kwp} kWp system.
+        System PR components: inverter efficiency × 0.84 (cable + soiling + mismatch losses).
+        </p>""", unsafe_allow_html=True)
+
+
+# ═══════════════════════════════════════════════════════════════
+#
+#   TAB 3 — FLEET CHARGING OPTIMISER
+#
+#   Problem: Anil runs all chargers at max power all night.
+#   Solution: EDF scheduler with SoC priority, charger health
+#   weighting, and tariff-aware time shifting.
+#
+#   Algorithm:
+#     1. For each vehicle: compute energy needed = (target_soc - current_soc)/100 × battery_kwh
+#     2. Compute available time slots (15-min intervals) from now to deadline
+#     3. Assign vehicles to chargers using EDF + priority weighting
+#     4. Apply thermal derating to charger power in each slot
+#     5. Shift slots to off-peak where deadline allows
+#
+#   Thermal derating (Infineon AN2020-16 model):
+#     T ≤ 40°C  → factor = 1.0
+#     40 < T ≤ 45 → factor = 1.0 - (T - 40) × 0.01
+#     T > 45    → factor = 0.95 - (T - 45) × 0.014
+#
+# ═══════════════════════════════════════════════════════════════
+
+with tab2:
 
     # ── Synthetic telemetry data ──────────────────────────────
 
@@ -553,9 +826,9 @@ with tab1:
             yaxis=dict(range=[0, 110], title="Score (0–100)"),
             height=240,
             margin=dict(l=0, r=0, t=36, b=20),
-            font=dict(family="Inter", size=11),
-            plot_bgcolor="#f8f9fb",
-            paper_bgcolor="#ffffff",
+            font=dict(family="DM Sans", size=11, color="#334155"),
+            plot_bgcolor="rgba(0,0,0,0)",
+            paper_bgcolor="rgba(0,0,0,0)",
             showlegend=False,
         )
         fig_sub.add_hline(y=85, line_dash="dot", line_color="#10b981", line_width=1)
@@ -580,7 +853,7 @@ with tab1:
                               vertical_spacing=0.12)
         fig_v.add_trace(go.Scatter(
             x=charger_data["timestamp"], y=charger_data["voltage"],
-            line=dict(color="#1a1a2e", width=1.2), name="Voltage"
+            line=dict(color="#334155", width=1.2), name="Voltage"
         ), row=1, col=1)
         fig_v.add_hrect(y0=400, y1=430, fillcolor="#d1fae5", opacity=0.3,
                         line_width=0, row=1, col=1)
@@ -593,9 +866,9 @@ with tab1:
         fig_v.update_layout(
             height=280,
             margin=dict(l=0, r=0, t=36, b=0),
-            font=dict(family="Inter", size=10),
-            plot_bgcolor="#f8f9fb",
-            paper_bgcolor="#ffffff",
+            font=dict(family="DM Sans", size=11, color="#334155"),
+            plot_bgcolor="rgba(0,0,0,0)",
+            paper_bgcolor="rgba(0,0,0,0)",
             showlegend=False,
         )
         st.plotly_chart(fig_v, use_container_width=True, config={"displayModeBar": False})
@@ -650,9 +923,9 @@ with tab1:
         height=280,
         yaxis=dict(range=[0, 105], title="Health Score"),
         margin=dict(l=0, r=0, t=10, b=10),
-        font=dict(family="Inter", size=11),
-        plot_bgcolor="#f8f9fb",
-        paper_bgcolor="#ffffff",
+        font=dict(family="DM Sans", size=11, color="#334155"),
+        plot_bgcolor="rgba(0,0,0,0)",
+        paper_bgcolor="rgba(0,0,0,0)",
         legend=dict(orientation="h", yanchor="bottom", y=1.02),
     )
     st.plotly_chart(fig_fleet, use_container_width=True, config={"displayModeBar": False})
@@ -679,340 +952,6 @@ with tab1:
 #     Service cost differential:
 #       Chinese: ₹X/event × N_events × (1 + import lead time penalty)
 #       Zenergize: ₹Y/event × N_events (domestic, next-day parts)
-#
-# ═══════════════════════════════════════════════════════════════
-
-with tab2:
-
-    # City irradiance database (GHI kWh/m²/year, from PVGIS data)
-    CITY_DATA = {
-        "Jaipur":      {"ghi": 1950, "lat": 26.91, "lon": 75.78, "state": "Rajasthan"},
-        "Jodhpur":     {"ghi": 2050, "lat": 26.29, "lon": 73.02, "state": "Rajasthan"},
-        "Delhi":       {"ghi": 1750, "lat": 28.61, "lon": 77.21, "state": "Delhi"},
-        "Pune":        {"ghi": 1850, "lat": 18.52, "lon": 73.86, "state": "Maharashtra"},
-        "Ahmedabad":   {"ghi": 2000, "lat": 23.02, "lon": 72.57, "state": "Gujarat"},
-        "Hyderabad":   {"ghi": 1900, "lat": 17.38, "lon": 78.47, "state": "Telangana"},
-        "Chennai":     {"ghi": 1800, "lat": 13.08, "lon": 80.27, "state": "Tamil Nadu"},
-        "Bengaluru":   {"ghi": 1780, "lat": 12.97, "lon": 77.59, "state": "Karnataka"},
-        "Lucknow":     {"ghi": 1680, "lat": 26.85, "lon": 80.95, "state": "Uttar Pradesh"},
-        "Bhopal":      {"ghi": 1820, "lat": 23.25, "lon": 77.41, "state": "Madhya Pradesh"},
-        "Nagpur":      {"ghi": 1870, "lat": 21.14, "lon": 79.08, "state": "Maharashtra"},
-        "Kolkata":     {"ghi": 1580, "lat": 22.57, "lon": 88.36, "state": "West Bengal"},
-        "Indore":      {"ghi": 1890, "lat": 22.72, "lon": 75.86, "state": "Madhya Pradesh"},
-        "Surat":       {"ghi": 1950, "lat": 21.17, "lon": 72.83, "state": "Gujarat"},
-        "Bikaner":     {"ghi": 2100, "lat": 28.01, "lon": 73.31, "state": "Rajasthan"},
-    }
-
-    def tco_model(
-        city, system_kwp, tariff, tariff_escalation,
-        comp_eff, zen_eff,
-        comp_price_per_kw, zen_price_per_kw,
-        comp_service_cost, zen_service_cost,
-        comp_service_events, zen_service_events,
-        discount_rate, years=25
-    ):
-        """
-        25-year TCO and NPV model.
-
-        Returns dict of annual arrays and summary figures.
-        """
-        ghi = CITY_DATA[city]["ghi"]
-
-        # System PR (excluding inverter efficiency)
-        pr_system = 0.84  # cable losses, soiling, mismatch, shading
-
-        # Annual generation (kWh/year)
-        # Gen = System_kWp × GHI × PR_system × η_inverter
-        gen_zen  = system_kwp * ghi * pr_system * (zen_eff / 100)
-        gen_comp = system_kwp * ghi * pr_system * (comp_eff / 100)
-        gen_gap  = gen_zen - gen_comp  # annual kWh advantage of Zenergize
-
-        # 25-year arrays
-        yrs = np.arange(1, years + 1)
-
-        # Tariff escalation
-        tariff_each_year = tariff * (1 + tariff_escalation / 100) ** (yrs - 1)
-
-        # Annual revenue from generation gap
-        revenue_gap_annual = gen_gap * tariff_each_year
-
-        # Cumulative revenue gap (undiscounted)
-        cum_revenue_gap = np.cumsum(revenue_gap_annual)
-
-        # NPV of revenue gap
-        npv_factors = 1 / (1 + discount_rate / 100) ** yrs
-        npv_revenue_gap = np.sum(revenue_gap_annual * npv_factors)
-
-        # Service cost differential (annual events × cost/event)
-        service_gap_annual = (
-            comp_service_events * comp_service_cost
-            - zen_service_events * zen_service_cost
-        )  # positive means Zenergize saves money each year
-
-        npv_service_gap = service_gap_annual * np.sum(npv_factors)
-
-        # Upfront cost premium for Zenergize
-        price_premium = (zen_price_per_kw - comp_price_per_kw) * system_kwp
-
-        # Total 25-year NPV advantage of Zenergize
-        total_npv_advantage = npv_revenue_gap + npv_service_gap - price_premium
-
-        # Breakeven year (undiscounted, conservative)
-        cumulative_savings = np.cumsum(
-            revenue_gap_annual + service_gap_annual
-        )
-        breakeven_mask = cumulative_savings >= price_premium
-        if breakeven_mask.any():
-            breakeven_year = yrs[breakeven_mask][0]
-        else:
-            breakeven_year = None
-
-        return {
-            "years": yrs,
-            "gen_zen": gen_zen,
-            "gen_comp": gen_comp,
-            "gen_gap_annual": gen_gap,
-            "gen_gap_25yr": gen_gap * years,
-            "tariff_each_year": tariff_each_year,
-            "revenue_gap_annual": revenue_gap_annual,
-            "cum_revenue_gap": cum_revenue_gap,
-            "npv_revenue_gap": npv_revenue_gap,
-            "npv_service_gap": npv_service_gap,
-            "price_premium": price_premium,
-            "total_npv_advantage": total_npv_advantage,
-            "breakeven_year": breakeven_year,
-            "service_gap_annual": service_gap_annual,
-        }
-
-    # ── Inputs ─────────────────────────────────────────────────
-
-    st.markdown('<div class="section-label">System Parameters</div>', unsafe_allow_html=True)
-
-    col1, col2, col3 = st.columns(3)
-
-    with col1:
-        city = st.selectbox("Installation City", sorted(CITY_DATA.keys()), index=0)
-        system_kwp = st.number_input("System Size (kWp)", min_value=1.0, max_value=500.0, value=5.0, step=0.5)
-        tariff = st.number_input("Current Electricity Tariff (₹/kWh)", min_value=3.0, max_value=12.0, value=7.0, step=0.25)
-        tariff_escalation = st.slider("Annual Tariff Escalation (%)", 0.0, 10.0, 5.0, 0.5)
-
-    with col2:
-        st.markdown("**Competitor Inverter**")
-        comp_eff = st.number_input("Competitor Efficiency (%)", min_value=90.0, max_value=99.9, value=96.5, step=0.1)
-        comp_price = st.number_input("Competitor Price (₹/kW)", min_value=3000, max_value=20000, value=8000, step=500)
-        comp_service = st.number_input("Competitor Service Cost / Event (₹)", min_value=500, max_value=50000, value=12000, step=500)
-        comp_events = st.number_input("Competitor Service Events / Year", min_value=0.0, max_value=5.0, value=0.5, step=0.1)
-
-    with col3:
-        st.markdown("**Zenergize Inverter**")
-        zen_eff = st.number_input("Zenergize Efficiency (%)", min_value=90.0, max_value=99.9, value=97.8, step=0.1)
-        zen_price = st.number_input("Zenergize Price (₹/kW)", min_value=3000, max_value=20000, value=11500, step=500)
-        zen_service = st.number_input("Zenergize Service Cost / Event (₹)", min_value=500, max_value=50000, value=2500, step=500)
-        zen_events = st.number_input("Zenergize Service Events / Year", min_value=0.0, max_value=5.0, value=0.3, step=0.1)
-
-    discount_rate = st.slider("Discount Rate (%)", 4.0, 15.0, 8.0, 0.5)
-
-    run_tco = st.button("Calculate 25-Year TCO", type="primary")
-
-    if run_tco or True:  # auto-calculate on first load too
-        result = tco_model(
-            city=city,
-            system_kwp=system_kwp,
-            tariff=tariff,
-            tariff_escalation=tariff_escalation,
-            comp_eff=comp_eff,
-            zen_eff=zen_eff,
-            comp_price_per_kw=comp_price,
-            zen_price_per_kw=zen_price,
-            comp_service_cost=comp_service,
-            zen_service_cost=zen_service,
-            comp_service_events=comp_events,
-            zen_service_events=zen_events,
-            discount_rate=discount_rate,
-        )
-
-        st.markdown("<hr>", unsafe_allow_html=True)
-        st.markdown('<div class="section-label">25-Year Analysis Results</div>', unsafe_allow_html=True)
-
-        # Summary cards
-        col_r1, col_r2, col_r3, col_r4 = st.columns(4)
-        adv = result["total_npv_advantage"]
-        adv_color = "#10b981" if adv >= 0 else "#ef4444"
-
-        with col_r1:
-            st.markdown(f"""
-            <div class="metric-card">
-              <div class="metric-label">25-Year NPV Advantage</div>
-              <div class="metric-value" style="color:{adv_color}">₹{abs(adv):,.0f}</div>
-              <div class="metric-sub">{"In favour of Zenergize" if adv >= 0 else "In favour of competitor"}</div>
-            </div>""", unsafe_allow_html=True)
-
-        with col_r2:
-            st.markdown(f"""
-            <div class="metric-card">
-              <div class="metric-label">Annual Generation Advantage</div>
-              <div class="metric-value">{result['gen_gap_annual']:,.0f}</div>
-              <div class="metric-sub">kWh/year more from Zenergize</div>
-            </div>""", unsafe_allow_html=True)
-
-        with col_r3:
-            be = result["breakeven_year"]
-            be_str = f"Year {be}" if be else ">25 yr"
-            st.markdown(f"""
-            <div class="metric-card">
-              <div class="metric-label">Breakeven Point</div>
-              <div class="metric-value">{be_str}</div>
-              <div class="metric-sub">Premium recovered vs. competitor</div>
-            </div>""", unsafe_allow_html=True)
-
-        with col_r4:
-            upfront = result["price_premium"]
-            st.markdown(f"""
-            <div class="metric-card">
-              <div class="metric-label">Upfront Premium</div>
-              <div class="metric-value">₹{upfront:,.0f}</div>
-              <div class="metric-sub">Additional cost for Zenergize</div>
-            </div>""", unsafe_allow_html=True)
-
-        st.markdown("<br>", unsafe_allow_html=True)
-
-        # Charts
-        col_ch1, col_ch2 = st.columns(2)
-
-        with col_ch1:
-            # Cumulative savings over 25 years
-            fig_cum = go.Figure()
-            fig_cum.add_trace(go.Scatter(
-                x=result["years"],
-                y=result["cum_revenue_gap"] + result["service_gap_annual"] * result["years"] - result["price_premium"],
-                mode="lines",
-                name="Cumulative net advantage",
-                line=dict(color="#1a1a2e", width=2),
-                fill="tozeroy",
-                fillcolor="rgba(16,185,129,0.1)",
-            ))
-            fig_cum.add_hline(y=0, line_dash="solid", line_color="#e5e7eb", line_width=1)
-            if result["breakeven_year"]:
-                fig_cum.add_vline(
-                    x=result["breakeven_year"],
-                    line_dash="dot", line_color="#f59e0b",
-                    annotation_text=f"Breakeven: Year {result['breakeven_year']}",
-                    annotation_font_size=10,
-                )
-            fig_cum.update_layout(
-                title="Cumulative Net Advantage of Zenergize (₹)",
-                height=300,
-                margin=dict(l=0, r=0, t=36, b=10),
-                font=dict(family="Inter", size=10),
-                plot_bgcolor="#f8f9fb",
-                paper_bgcolor="#ffffff",
-                showlegend=False,
-                yaxis=dict(tickprefix="₹", tickformat=",.0f"),
-            )
-            st.plotly_chart(fig_cum, use_container_width=True, config={"displayModeBar": False})
-
-        with col_ch2:
-            # Sensitivity: tariff escalation impact on NPV
-            escalations = np.arange(0, 11, 1)
-            npv_at_esc = []
-            for esc in escalations:
-                r = tco_model(
-                    city=city, system_kwp=system_kwp, tariff=tariff,
-                    tariff_escalation=esc, comp_eff=comp_eff, zen_eff=zen_eff,
-                    comp_price_per_kw=comp_price, zen_price_per_kw=zen_price,
-                    comp_service_cost=comp_service, zen_service_cost=zen_service,
-                    comp_service_events=comp_events, zen_service_events=zen_events,
-                    discount_rate=discount_rate,
-                )
-                npv_at_esc.append(r["total_npv_advantage"])
-
-            fig_sens = go.Figure()
-            fig_sens.add_trace(go.Scatter(
-                x=escalations, y=npv_at_esc,
-                mode="lines+markers",
-                line=dict(color="#1a1a2e", width=2),
-                marker=dict(size=6),
-                name="NPV",
-            ))
-            fig_sens.add_hline(y=0, line_dash="dot", line_color="#ef4444", line_width=1)
-            fig_sens.update_layout(
-                title="Sensitivity: NPV vs Annual Tariff Escalation (%)",
-                height=300,
-                margin=dict(l=0, r=0, t=36, b=10),
-                font=dict(family="Inter", size=10),
-                plot_bgcolor="#f8f9fb",
-                paper_bgcolor="#ffffff",
-                showlegend=False,
-                xaxis=dict(title="Annual Tariff Escalation (%)"),
-                yaxis=dict(tickprefix="₹", tickformat=",.0f"),
-            )
-            st.plotly_chart(fig_sens, use_container_width=True, config={"displayModeBar": False})
-
-        # Waterfall breakdown
-        st.markdown('<div class="section-label">Cost-Benefit Breakdown</div>', unsafe_allow_html=True)
-
-        wf_labels = ["Upfront Premium (cost)", "Energy Revenue Advantage (NPV)", "Service Saving (NPV)", "Net Advantage"]
-        wf_values = [
-            -result["price_premium"],
-            result["npv_revenue_gap"],
-            result["npv_service_gap"],
-            result["total_npv_advantage"],
-        ]
-        wf_measure = ["relative", "relative", "relative", "total"]
-        wf_colors = ["#ef4444", "#10b981", "#10b981", "#1a1a2e"]
-
-        fig_wf = go.Figure(go.Waterfall(
-            orientation="v",
-            measure=wf_measure,
-            x=wf_labels,
-            y=wf_values,
-            connector={"line": {"color": "#e5e7eb", "width": 1}},
-            decreasing={"marker": {"color": "#fee2e2", "line": {"color": "#ef4444", "width": 1}}},
-            increasing={"marker": {"color": "#d1fae5", "line": {"color": "#10b981", "width": 1}}},
-            totals={"marker": {"color": "#1a1a2e"}},
-            text=[f"₹{v:,.0f}" for v in wf_values],
-            textposition="outside",
-        ))
-        fig_wf.update_layout(
-            height=300,
-            margin=dict(l=0, r=0, t=10, b=10),
-            font=dict(family="Inter", size=10),
-            plot_bgcolor="#f8f9fb",
-            paper_bgcolor="#ffffff",
-            showlegend=False,
-            yaxis=dict(tickprefix="₹", tickformat=",.0f"),
-        )
-        st.plotly_chart(fig_wf, use_container_width=True, config={"displayModeBar": False})
-
-        # Location context
-        city_info = CITY_DATA[city]
-        st.markdown(f"""
-        <p class="data-note">
-        Location: {city}, {city_info['state']} — Annual irradiance: {city_info['ghi']} kWh/m²/year (PVGIS reference data).
-        Efficiency advantage: {zen_eff - comp_eff:.1f}% → {result['gen_gap_annual']:,.0f} kWh/year on {system_kwp} kWp system.
-        System PR components: inverter efficiency × 0.84 (cable + soiling + mismatch losses).
-        </p>""", unsafe_allow_html=True)
-
-
-# ═══════════════════════════════════════════════════════════════
-#
-#   TAB 3 — FLEET CHARGING OPTIMISER
-#
-#   Problem: Anil runs all chargers at max power all night.
-#   Solution: EDF scheduler with SoC priority, charger health
-#   weighting, and tariff-aware time shifting.
-#
-#   Algorithm:
-#     1. For each vehicle: compute energy needed = (target_soc - current_soc)/100 × battery_kwh
-#     2. Compute available time slots (15-min intervals) from now to deadline
-#     3. Assign vehicles to chargers using EDF + priority weighting
-#     4. Apply thermal derating to charger power in each slot
-#     5. Shift slots to off-peak where deadline allows
-#
-#   Thermal derating (Infineon AN2020-16 model):
-#     T ≤ 40°C  → factor = 1.0
-#     40 < T ≤ 45 → factor = 1.0 - (T - 40) × 0.01
-#     T > 45    → factor = 0.95 - (T - 45) × 0.014
 #
 # ═══════════════════════════════════════════════════════════════
 
@@ -1317,29 +1256,29 @@ with tab3:
             x=vehicles_data["current_soc"],
             name="SoC at Arrival",
             nbinsx=20,
-            marker_color="#e5e7eb",
-            marker_line_color="#9ca3af",
+            marker_color="#cbd5e1",
+            marker_line_color="#94a3b8",
             marker_line_width=1,
         ))
         fig_soc.add_trace(go.Histogram(
             x=df_result["final_soc"],
             name="SoC at 5:30am",
             nbinsx=20,
-            marker_color="#1a1a2e",
+            marker_color="#334155",
             opacity=0.8,
-            marker_line_color="#1a1a2e",
+            marker_line_color="#475569",
             marker_line_width=1,
         ))
         fig_soc.add_vline(x=80, line_dash="dot", line_color="#ef4444",
-                          annotation_text="Target 80%", annotation_font_size=9)
+                          annotation_text="Target 80%", annotation_font_size=10, annotation_font_color="#475569", annotation_font_color="#475569")
         fig_soc.update_layout(
             title="SoC Distribution: Arrival vs. Departure",
             barmode="overlay",
             height=280,
             margin=dict(l=0, r=0, t=36, b=10),
-            font=dict(family="Inter", size=10),
-            plot_bgcolor="#f8f9fb",
-            paper_bgcolor="#ffffff",
+            font=dict(family="DM Sans", size=11, color="#334155"),
+            plot_bgcolor="rgba(0,0,0,0)",
+            paper_bgcolor="rgba(0,0,0,0)",
             legend=dict(orientation="h", yanchor="bottom", y=1.02),
             xaxis=dict(title="State of Charge (%)", range=[0, 105]),
             yaxis=dict(title="Vehicles"),
@@ -1365,14 +1304,14 @@ with tab3:
             ),
         ))
         fig_ch.add_vline(x=65, line_dash="dot", line_color="#f59e0b",
-                         annotation_text="Health threshold", annotation_font_size=9)
+                         annotation_text="Health threshold", annotation_font_size=10, annotation_font_color="#475569", annotation_font_color="#475569")
         fig_ch.update_layout(
             title="Charger Health vs Effective Charging Power",
             height=280,
             margin=dict(l=0, r=0, t=36, b=10),
-            font=dict(family="Inter", size=10),
-            plot_bgcolor="#f8f9fb",
-            paper_bgcolor="#ffffff",
+            font=dict(family="DM Sans", size=11, color="#334155"),
+            plot_bgcolor="rgba(0,0,0,0)",
+            paper_bgcolor="rgba(0,0,0,0)",
             xaxis=dict(title="Health Score", range=[0, 110]),
             yaxis=dict(title="Effective Power (kW)"),
         )
@@ -1405,16 +1344,16 @@ with tab3:
 
     # Add tariff boundary
     fig_gantt.add_vline(x=22, line_dash="dot", line_color="#f59e0b",
-                        annotation_text="Off-peak starts 10pm", annotation_font_size=9)
+                        annotation_text="Off-peak starts 10pm", annotation_font_size=10, annotation_font_color="#475569", annotation_font_color="#475569")
     fig_gantt.add_vline(x=5.5, line_dash="dot", line_color="#ef4444",
-                        annotation_text="Deadline 5:30am", annotation_font_size=9)
+                        annotation_text="Deadline 5:30am", annotation_font_size=10, annotation_font_color="#475569", annotation_font_color="#475569")
 
     fig_gantt.update_layout(
         height=500,
         margin=dict(l=0, r=0, t=10, b=10),
-        font=dict(family="Inter", size=9),
-        plot_bgcolor="#f8f9fb",
-        paper_bgcolor="#ffffff",
+        font=dict(family="DM Sans", size=10, color="#334155"),
+        plot_bgcolor="rgba(0,0,0,0)",
+        paper_bgcolor="rgba(0,0,0,0)",
         xaxis=dict(
             title="Hour of Day",
             tickvals=[20, 22, 0, 2, 4, 5.5],
