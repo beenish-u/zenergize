@@ -1304,7 +1304,7 @@ with tab3:
             ),
         ))
         fig_ch.add_vline(x=65, line_dash="dot", line_color="#f59e0b",
-                         annotation_text="Health threshold", annotation_font_size=10, annotation_font_color="#475569", annotation_font_color="#475569")
+                         annotation_text="Health threshold", annotation_font_size=10, annotation_font_color="#475569")
         fig_ch.update_layout(
             title="Charger Health vs Effective Charging Power",
             height=280,
@@ -1344,9 +1344,9 @@ with tab3:
 
     # Add tariff boundary
     fig_gantt.add_vline(x=22, line_dash="dot", line_color="#f59e0b",
-                        annotation_text="Off-peak starts 10pm", annotation_font_size=10, annotation_font_color="#475569", annotation_font_color="#475569")
+                        annotation_text="Off-peak starts 10pm", annotation_font_size=10, annotation_font_color="#475569")
     fig_gantt.add_vline(x=5.5, line_dash="dot", line_color="#ef4444",
-                        annotation_text="Deadline 5:30am", annotation_font_size=10, annotation_font_color="#475569", annotation_font_color="#475569")
+                        annotation_text="Deadline 5:30am", annotation_font_size=10, annotation_font_color="#475569")
 
     fig_gantt.update_layout(
         height=500,
