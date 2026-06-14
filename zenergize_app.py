@@ -61,11 +61,7 @@ st.markdown("""
     --glow: 0 0 24px rgba(34,211,238,0.08);
 }
 
-html, body, [class*="css"] {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
-}
+
 
 /* MAIN CONTAINER */
 .block-container {
